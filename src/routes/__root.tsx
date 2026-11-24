@@ -1,6 +1,9 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
+import { Navbar } from '../components/Navbar'
+import { RencanakanKunjunganSection } from '../components/RencanakanKunjunganSection'
+import { Footer } from '../components/Footer'
 
 import appCss from '../styles.css?url'
 
@@ -15,7 +18,7 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'Desa Wisata Karangpakuan • Sumedang',
       },
     ],
     links: [
@@ -30,12 +33,15 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="id">
       <head>
         <HeadContent />
       </head>
-      <body>
-        {children}
+      <body className="antialiased bg-white text-slate-900 flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <RencanakanKunjunganSection />
+        <Footer />
         <TanStackDevtools
           config={{
             position: 'bottom-right',
