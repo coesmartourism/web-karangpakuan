@@ -5,3 +5,6 @@ import { env } from 'cloudflare:workers'
 export function getDB(): D1Database {
   return (env as unknown as { DB: D1Database }).DB
 }
+export function getBucket(): R2Bucket {
+  return (env as unknown as { karangpakuan_media: R2Bucket }).karangpakuan_media
+}

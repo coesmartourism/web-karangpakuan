@@ -31,6 +31,17 @@
 			"database_name": "db-karangpakuan",
 			"database_id": "8183e1f6-2c1c-4417-90f0-724dd7afe296"
 		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "BUCKET",
+			"bucket_name": "karangpakuan-media"
+		},
+		{
+			"bucket_name": "karangpakuan-media",
+			"binding": "karangpakuan_media",
+			"remote": true
+		}
 	]
 	/**
 	 * Environment Variables
