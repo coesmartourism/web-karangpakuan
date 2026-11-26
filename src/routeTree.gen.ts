@@ -10,11 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DestinasiRouteImport } from './routes/destinasi'
+import { Route as GaleriRouteImport } from './routes/galeri'
+import { Route as PaketWisataRouteImport } from './routes/paket-wisata'
 import { Route as ProfilRouteImport } from './routes/profil'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DestinasiRoute = DestinasiRouteImport.update({
+  id: '/destinasi',
+  path: '/destinasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GaleriRoute = GaleriRouteImport.update({
+  id: '/galeri',
+  path: '/galeri',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaketWisataRoute = PaketWisataRouteImport.update({
+  id: '/paket-wisata',
+  path: '/paket-wisata',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfilRoute = ProfilRouteImport.update({
@@ -25,27 +43,39 @@ const ProfilRoute = ProfilRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/destinasi': typeof DestinasiRoute
+  '/galeri': typeof GaleriRoute
+  '/paket-wisata': typeof PaketWisataRoute
   '/profil': typeof ProfilRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/destinasi': typeof DestinasiRoute
+  '/galeri': typeof GaleriRoute
+  '/paket-wisata': typeof PaketWisataRoute
   '/profil': typeof ProfilRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/destinasi': typeof DestinasiRoute
+  '/galeri': typeof GaleriRoute
+  '/paket-wisata': typeof PaketWisataRoute
   '/profil': typeof ProfilRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/profil'
+  fullPaths: '/' | '/destinasi' | '/galeri' | '/paket-wisata' | '/profil'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/profil'
-  id: '__root__' | '/' | '/profil'
+  to: '/' | '/destinasi' | '/galeri' | '/paket-wisata' | '/profil'
+  id: '__root__' | '/' | '/destinasi' | '/galeri' | '/paket-wisata' | '/profil'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DestinasiRoute: typeof DestinasiRoute
+  GaleriRoute: typeof GaleriRoute
+  PaketWisataRoute: typeof PaketWisataRoute
   ProfilRoute: typeof ProfilRoute
 }
 
@@ -56,6 +86,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinasi': {
+      id: '/destinasi'
+      path: '/destinasi'
+      fullPath: '/destinasi'
+      preLoaderRoute: typeof DestinasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galeri': {
+      id: '/galeri'
+      path: '/galeri'
+      fullPath: '/galeri'
+      preLoaderRoute: typeof GaleriRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/paket-wisata': {
+      id: '/paket-wisata'
+      path: '/paket-wisata'
+      fullPath: '/paket-wisata'
+      preLoaderRoute: typeof PaketWisataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profil': {
@@ -70,6 +121,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DestinasiRoute: DestinasiRoute,
+  GaleriRoute: GaleriRoute,
+  PaketWisataRoute: PaketWisataRoute,
   ProfilRoute: ProfilRoute,
 }
 export const routeTree = rootRouteImport

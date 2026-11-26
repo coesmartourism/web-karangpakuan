@@ -14,49 +14,53 @@ export function RencanakanKunjunganSection({
           {/* Kiri (7 kolom): Info Perjalanan & Banner WhatsApp */}
           <div className="lg:col-span-7 p-8 sm:p-10 lg:p-12 space-y-8">
             <div className="space-y-3">
-              <span className="inline-block px-3.5 py-1 rounded-full text-[11px] font-bold tracking-[0.18em] uppercase bg-sky-100 text-[#0f3456]">
+              <span className="inline-block px-3.5 py-1 rounded-full text-[11px] font-bold tracking-[0.18em] uppercase bg-sky-100/80 border border-sky-200/80 text-[#0f3456]">
                 PANDUAN PERJALANAN
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#0f3456]">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0f3456] tracking-tight">
                 Rencanakan Kunjungan Anda
               </h2>
-              <p className="text-sm sm:text-base text-slate-600">
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                 Rencanakan liburan impianmu sekarang dan nikmati keasrian waduk,
                 budaya lokal, serta pengalaman wisata autentik di Desa Karang
                 Pakuan.
               </p>
             </div>
 
-            {/* 3 Kartu Info */}
+            {/* 3 Kartu Info (Ikon sejajar di samping judul atas) */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="rounded-2xl border border-slate-200/80 p-4 space-y-2.5">
-                <div className="w-9 h-9 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold tracking-wider text-sky-600 uppercase">
-                    KAWASAN WISATA
-                  </p>
-                  <h3 className="text-sm font-bold text-[#0f3456] mt-0.5">
-                    Lokasi Strategis
-                  </h3>
+              <div className="rounded-2xl border border-slate-200/80 bg-white p-5 flex flex-col justify-between space-y-4">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-200/70 text-sky-600 flex items-center justify-center shrink-0">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold tracking-wide text-sky-600 uppercase whitespace-nowrap">
+                      KAWASAN WISATA
+                    </p>
+                    <h3 className="text-[15px] font-bold text-[#0f3456] leading-snug mt-0.5">
+                      Lokasi Strategis
+                    </h3>
+                  </div>
                 </div>
                 <p className="text-xs text-slate-500 leading-relaxed">
                   Desa Karang Pakuan, Kec. Darmaraja, Kab. Sumedang, Jawa Barat.
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-slate-200/80 p-4 space-y-2.5">
-                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                  <Zap className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold tracking-wider text-emerald-600 uppercase">
-                    AKSES CEPAT
-                  </p>
-                  <h3 className="text-sm font-bold text-[#0f3456] mt-0.5">
-                    Akses Tempuh
-                  </h3>
+              <div className="rounded-2xl border border-slate-200/80 bg-white p-5 flex flex-col justify-between space-y-4">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200/70 text-emerald-600 flex items-center justify-center shrink-0">
+                    <Zap className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold tracking-wide text-emerald-600 uppercase whitespace-nowrap">
+                      AKSES CEPAT
+                    </p>
+                    <h3 className="text-[15px] font-bold text-[#0f3456] leading-snug mt-0.5">
+                      Akses Tempuh
+                    </h3>
+                  </div>
                 </div>
                 <p className="text-xs text-slate-500 leading-relaxed">
                   Hanya 30 menit dari pusat Kota Sumedang, dengan akses jalan
@@ -64,17 +68,19 @@ export function RencanakanKunjunganSection({
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-slate-200/80 p-4 space-y-2.5">
-                <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
-                  <Clock className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold tracking-wider text-amber-600 uppercase">
-                    WAKTU LAYANAN
-                  </p>
-                  <h3 className="text-sm font-bold text-[#0f3456] mt-0.5">
-                    Jam Operasional
-                  </h3>
+              <div className="rounded-2xl border border-slate-200/80 bg-white p-5 flex flex-col justify-between space-y-4">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200/70 text-amber-600 flex items-center justify-center shrink-0">
+                    <Clock className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold tracking-wide text-amber-600 uppercase whitespace-nowrap">
+                      WAKTU LAYANAN
+                    </p>
+                    <h3 className="text-[15px] font-bold text-[#0f3456] leading-snug mt-0.5">
+                      Jam Operasional
+                    </h3>
+                  </div>
                 </div>
                 <p className="text-xs text-slate-500 leading-relaxed">
                   Buka Setiap Hari: 08.00 – 17.00 WIB (Spot Sunset s/d 18.00

@@ -10,6 +10,7 @@ import {
   Store,
   ArrowRight,
   Quote,
+  ChevronDown,
 } from 'lucide-react'
 import { PageHero } from '../components/PageHero'
 import { getDB } from '../lib/db'
@@ -18,6 +19,7 @@ interface ProfilImagesRow {
   image_profil_singkat: string | null
   image_sejarah: string | null
   image_pokdarwis: string | null
+  whatsapp_1: string | null
 }
 
 interface VisiRow {
@@ -150,7 +152,7 @@ const getProfilPageData = createServerFn({ method: 'GET' }).handler(async () => 
     const [imagesRow, visiRow, misiRes] = await Promise.all([
       db
         .prepare(
-          'SELECT image_profil_singkat, image_sejarah, image_pokdarwis FROM profil_desa LIMIT 1',
+          'SELECT image_profil_singkat, image_sejarah, image_pokdarwis, whatsapp_1 FROM profil_desa LIMIT 1',
         )
         .first<ProfilImagesRow>(),
       db
@@ -174,6 +176,7 @@ const getProfilPageData = createServerFn({ method: 'GET' }).handler(async () => 
     }
 
     return {
+      whatsappNumber: imagesRow?.whatsapp_1 || '6281318375641',
       imageProfilSingkat: imagesRow?.image_profil_singkat ?? null,
       imageSejarah: imagesRow?.image_sejarah ?? null,
       imagePokdarwis: imagesRow?.image_pokdarwis ?? null,
@@ -192,6 +195,7 @@ const getProfilPageData = createServerFn({ method: 'GET' }).handler(async () => 
     }
   } catch {
     return {
+      whatsappNumber: '6281318375641',
       imageProfilSingkat: null,
       imageSejarah: null,
       imagePokdarwis: null,
@@ -223,22 +227,57 @@ const pilarStyles = [
 ]
 
 function ProfilPage() {
-  const { imageProfilSingkat, imageSejarah, imagePokdarwis, visi, misiList } =
-    Route.useLoaderData()
+  const {
+    imageProfilSingkat,
+    imageSejarah,
+    imagePokdarwis,
+    visi,
+    misiList,
+    whatsappNumber,
+  } = Route.useLoaderData()
 
   return (
     <div className="bg-[#F8FAFC] text-slate-900">
       {/* HEADER / HERO */}
       <PageHero
         badge="PROFIL DESA WISATA"
-        title="Mengenal Lebih Dekat"
+        title="Profil Lengkap"
         highlightedTitle="Desa Wisata Karang Pakuan"
-        subtitle="Harmoni Alam Pesisir Waduk Jatigede & Kearifan Lokal Priangan"
-        description="Telusuri sejarah, visi misi pembangunan, potensi unggulan, serta sinergi masyarakat dan Pokdarwis Karangpakuan."
+        subtitle="Know the Identity, Explore the Potential"
+        description="Mengenal lebih dekat sejarah, identitas, potensi alam dan budaya, serta pengelola di balik Desa Wisata Karang Pakuan, Sumedang."
         imageSrc="/images/Heroimage.png"
-        minHeightClass="min-h-[72vh]"
-      />
+        bottomFadeColor="#F8FAFC"
+      >
+        <a
+          href="#sejarah-desa"
+          className="inline-flex items-center gap-2 bg-[#ea7c1d] hover:bg-[#d66d12] text-white font-sans text-sm font-semibold px-6 py-3 rounded-full shadow-lg transition-all cursor-pointer"
+        >
+          <span>Pelajari Sejarah</span>
+          <ChevronDown className="w-4 h-4" />
+        </a>
 
+        <a
+          href={`https://wa.me/${whatsappNumber}?text=Halo%20Desa%20Wisata%20Karang%20Pakuan,%20saya%20ingin%20bertanya%20tentang%20profil%20dan%20wisata%20desa.`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-[#16a34a] hover:bg-[#15803d] text-white font-sans text-sm font-semibold px-6 py-3 rounded-full shadow-lg transition-all"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-4 h-4 shrink-0"
+            aria-hidden="true"
+          >
+            <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+            <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
+          </svg>
+          <span>Hubungi Kami</span>
+        </a>
+      </PageHero>
       {/* 1. PROFIL SINGKAT KARANG PAKUAN */}
       <section className="py-16 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

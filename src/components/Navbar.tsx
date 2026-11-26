@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { ChevronDown, Moon, Sun, Menu, X } from 'lucide-react'
 
 export function Navbar() {
@@ -9,6 +9,11 @@ export function Navbar() {
   const [isDark, setIsDark] = useState(false)
 
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+
+  const isDestinasiActive = ['/destinasi', '/paket-wisata', '/galeri'].includes(
+    pathname,
+  )
 
   // Deteksi scroll untuk mengubah background transparan -> putih
   useEffect(() => {
@@ -85,98 +90,133 @@ export function Navbar() {
 
         {/* TENGAH: MENU NAVIGASI DESKTOP */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-{/* Beranda */}
-<Link
-  to="/"
-  activeOptions={{ exact: true }}
-  className="relative py-1.5 transition-colors"
->
-  {({ isActive }) => (
-    <>
-      <span
-        className={
-          isActive
-            ? isScrolled
-              ? 'text-slate-900 font-semibold'
-              : 'text-white font-semibold'
-            : isScrolled
-              ? 'text-slate-600 hover:text-slate-900'
-              : 'text-slate-200 hover:text-white'
-        }
-      >
-        Beranda
-      </span>
-      {isActive && (
-        <span className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-sky-400 rounded-full" />
-      )}
-    </>
-  )}
-</Link>
+          {/* Beranda */}
+          <Link
+            to="/"
+            activeOptions={{ exact: true }}
+            className="relative py-1.5 transition-colors"
+          >
+            {({ isActive }) => (
+              <>
+                <span
+                  className={
+                    isActive
+                      ? isScrolled
+                        ? 'text-slate-900 font-semibold'
+                        : 'text-white font-semibold'
+                      : isScrolled
+                        ? 'text-slate-600 hover:text-slate-900'
+                        : 'text-slate-200 hover:text-white'
+                  }
+                >
+                  Beranda
+                </span>
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-sky-400 rounded-full" />
+                )}
+              </>
+            )}
+          </Link>
 
-{/* Profil */}
-<Link to="/profil" className="relative py-1.5 transition-colors">
-  {({ isActive }) => (
-    <>
-      <span
-        className={
-          isActive
-            ? isScrolled
-              ? 'text-slate-900 font-semibold'
-              : 'text-white font-semibold'
-            : isScrolled
-              ? 'text-slate-600 hover:text-slate-900'
-              : 'text-slate-200 hover:text-white'
-        }
-      >
-        Profil
-      </span>
-      {isActive && (
-        <span className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-sky-400 rounded-full" />
-      )}
-    </>
-  )}
-</Link>
+          {/* Profil */}
+          <Link to="/profil" className="relative py-1.5 transition-colors">
+            {({ isActive }) => (
+              <>
+                <span
+                  className={
+                    isActive
+                      ? isScrolled
+                        ? 'text-slate-900 font-semibold'
+                        : 'text-white font-semibold'
+                      : isScrolled
+                        ? 'text-slate-600 hover:text-slate-900'
+                        : 'text-slate-200 hover:text-white'
+                  }
+                >
+                  Profil
+                </span>
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-sky-400 rounded-full" />
+                )}
+              </>
+            )}
+          </Link>
 
-          {/* Destinasi (Dropdown) */}
-          <div className="relative" ref={dropdownRef}>
-            <button
-              type="button"
-              onClick={() => setIsDropdownOpen((prev) => !prev)}
-              className={`relative py-1.5 flex items-center gap-1.5 transition-colors cursor-pointer ${
-                isDropdownOpen
-                  ? isScrolled
-                    ? 'text-slate-900 font-semibold'
-                    : 'text-white font-semibold'
-                  : isScrolled
-                    ? 'text-slate-600 hover:text-slate-900'
-                    : 'text-slate-200 hover:text-white'
-              }`}
+          {/* Destinasi (Klik ke /destinasi + Buka Dropdown) */}
+          <div
+            ref={dropdownRef}
+            className="relative"
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+          >
+            <Link
+              to="/destinasi"
+              onClick={() => setIsDropdownOpen(true)}
+              className="relative inline-flex items-center gap-1.5 py-1.5 transition-colors"
             >
-              <span>Destinasi</span>
+              <span
+                className={
+                  isDestinasiActive
+                    ? isScrolled
+                      ? 'text-slate-900 font-semibold'
+                      : 'text-white font-semibold'
+                    : isScrolled
+                      ? 'text-slate-600 hover:text-slate-900'
+                      : 'text-slate-200 hover:text-white'
+                }
+              >
+                Destinasi
+              </span>
               <ChevronDown
-                className={`w-4 h-4 transition-transform duration-200 ${
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${
                   isDropdownOpen ? 'rotate-180' : ''
+                } ${
+                  isDestinasiActive
+                    ? isScrolled
+                      ? 'text-slate-900'
+                      : 'text-white'
+                    : isScrolled
+                      ? 'text-slate-600'
+                      : 'text-slate-200'
                 }`}
               />
-            </button>
+              {isDestinasiActive && (
+                <span className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-sky-400 rounded-full" />
+              )}
+            </Link>
 
-            {/* Panel Dropdown Putih */}
             {isDropdownOpen && (
-              <div className="absolute left-0 mt-3 w-52 bg-white rounded-2xl shadow-xl border border-slate-100 py-2.5 px-2 z-50">
-                <a
-                  href="#paket-wisata"
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-sky-700 hover:bg-slate-50 rounded-xl transition-colors"
+              <div className="absolute left-0 top-full pt-2 w-48 z-50">
+                <div
+                  className={`rounded-2xl backdrop-blur-md border shadow-xl py-2 overflow-hidden ${
+                    isScrolled
+                      ? 'bg-white/95 border-slate-200/80'
+                      : 'bg-[#0b192c]/95 border-white/15'
+                  }`}
                 >
-                  Paket Wisata
-                </a>
-                <a
-                  href="#galeri"
-                  onClick={() => setIsDropdownOpen(false)}
-                  className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-sky-700 hover:bg-slate-50 rounded-xl transition-colors mt-0.5"
-                >
-                  Galeri
-                </a>
+                  <Link
+                    to="/paket-wisata"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className={`block px-4 py-2.5 text-sm transition-colors ${
+                      isScrolled
+                        ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
+                        : 'text-white/90 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    Paket Wisata
+                  </Link>
+                  <Link
+                    to="/galeri"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className={`block px-4 py-2.5 text-sm transition-colors ${
+                      isScrolled
+                        ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
+                        : 'text-white/90 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    Galeri
+                  </Link>
+                </div>
               </div>
             )}
           </div>
@@ -255,32 +295,36 @@ export function Navbar() {
           >
             Beranda
           </Link>
-          <a
-            href="#profil"
+          <Link
+            to="/profil"
             onClick={() => setIsMobileMenuOpen(false)}
             className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-800 hover:bg-slate-100"
           >
             Profil
-          </a>
+          </Link>
           <div className="px-3 py-2">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
+            <Link
+              to="/destinasi"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block text-sm font-semibold text-slate-800 hover:text-sky-700 mb-1.5"
+            >
               Destinasi
-            </p>
+            </Link>
             <div className="pl-3 space-y-1 border-l-2 border-slate-200">
-              <a
-                href="#paket-wisata"
+              <Link
+                to="/paket-wisata"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block py-1.5 text-sm font-medium text-slate-700 hover:text-sky-700"
               >
                 Paket Wisata
-              </a>
-              <a
-                href="#galeri"
+              </Link>
+              <Link
+                to="/galeri"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block py-1.5 text-sm font-medium text-slate-700 hover:text-sky-700"
               >
                 Galeri
-              </a>
+              </Link>
             </div>
           </div>
           <a

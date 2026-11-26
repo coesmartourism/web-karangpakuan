@@ -95,3 +95,59 @@ CREATE TABLE IF NOT EXISTS misi_desa (
   deskripsi TEXT NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Tabel Utama Destinasi Wisata (mendukung 1 atau banyak destinasi unggulan)
+CREATE TABLE IF NOT EXISTS destinasi (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  slug TEXT UNIQUE NOT NULL,
+  judul TEXT NOT NULL,
+  badge_lokasi TEXT DEFAULT 'Basisir Muda Demang',
+  sub_lokasi TEXT DEFAULT 'Waduk Jatigede, Sumedang',
+  is_unggulan INTEGER DEFAULT 1,
+  deskripsi TEXT NOT NULL,
+  image_url TEXT,
+  lokasi_teks TEXT DEFAULT 'Desa Karangpakuan, Sumedang',
+  jam_operasional TEXT DEFAULT '08.00 – 17.00 WIB',
+  harga_tiket TEXT DEFAULT 'Rp10.000',
+  satuan_tiket TEXT DEFAULT '/ orang',
+  daya_tarik_utama_json TEXT, -- Array string: ["Wisata Alam", "Camping Ground", ...]
+  aktivitas_detail_json TEXT, -- Array object: [{ icon, judul, deskripsi, warna }]
+  fasilitas_json TEXT,        -- Array object: [{ icon, nama, is_more }]
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabel Galeri Foto & Video Destinasi (terhubung ke /destinasi dan /galeri)
+CREATE TABLE IF NOT EXISTS destinasi_galeri (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  destinasi_id INTEGER DEFAULT 1,
+  tipe TEXT CHECK(tipe IN ('foto', 'video')) NOT NULL DEFAULT 'foto',
+  judul TEXT NOT NULL,
+  subjudul TEXT,
+  durasi TEXT, -- Khusus tipe 'video', misal '02:15'
+  media_url TEXT,
+  thumbnail_url TEXT,
+  urutan INTEGER DEFAULT 0,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS paket_wisata (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  slug TEXT UNIQUE NOT NULL,
+  kategori_badge TEXT NOT NULL,          
+  badge_dot_color TEXT DEFAULT 'sky',    
+  sub_lokasi TEXT NOT NULL,              
+  rating TEXT DEFAULT '4.8',
+  jumlah_ulasan TEXT DEFAULT '120+ ulasan',
+  judul TEXT NOT NULL,                    
+  deskripsi TEXT NOT NULL,
+  durasi TEXT NOT NULL,                   
+  kapasitas TEXT NOT NULL,                
+  harga TEXT NOT NULL,                    
+  satuan_harga TEXT DEFAULT '/ orang',
+  is_populer INTEGER DEFAULT 0,           
+  label_highlight TEXT,                  
+  fasilitas_json TEXT NOT NULL,         
+  image_url TEXT,
+  urutan INTEGER DEFAULT 0,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);

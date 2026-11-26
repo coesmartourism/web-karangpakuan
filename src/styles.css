@@ -1,5 +1,14 @@
 
 @import "tailwindcss";
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+}
+@layer base {
+  body {
+    font-family: var(--font-sans);
+  }
+}
 
 * {
   box-sizing: border-box;
@@ -14,4 +23,5 @@ body,
 body {
   margin: 0;
 }
+
 

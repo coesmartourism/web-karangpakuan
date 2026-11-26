@@ -122,6 +122,7 @@ const categoryColors = ['text-emerald-600', 'text-amber-600', 'text-sky-600']
 
 function HomePage() {
   const data = Route.useLoaderData()
+  const waPrimary = data?.profil?.whatsapp_1 || '6281318375641'
 
   // 1. Profil Desa (Fallback ke teks default & kotak hitam jika tabel masih kosong)
   const profilJudul = data.profil?.judul || 'Profil Karang Pakuan'
@@ -274,46 +275,45 @@ function HomePage() {
 
   return (
     <div className="bg-[#F8FAFC] text-slate-900">
-      {/* 1. HERO SECTION */}
+      {/*{/* 1. HERO SECTION */}
       <PageHero
         badge="KARANG PAKUAN SUMEDANG"
         title="Selamat Datang Di"
         highlightedTitle="Desa Wisata Karang Pakuan"
-        subtitle="Discover the Village , Experience the Culture"
+        subtitle="Discover the Village, Experience the Culture"
         description="Nikmati keindahan alam, budaya, dan pengalaman wisata autentik di Desa Wisata Karang Pakuan, Sumedang."
         imageSrc="/images/Heroimage.png"
+        bottomFadeColor="#F8FAFC"
       >
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="#destinasi-unggulan"
-            className="inline-flex items-center gap-2 bg-[#ea7c1d] hover:bg-[#d66d12] text-white font-semibold text-sm px-6 py-3 rounded-full shadow-lg transition-all"
-          >
-            <span>Jelajahi Wisata</span>
-            <ChevronDown className="w-4 h-4" />
-          </a>
+        <a
+          href="#destinasi-unggulan"
+          className="inline-flex items-center gap-2 bg-[#ea7c1d] hover:bg-[#d66d12] text-white font-sans text-sm font-semibold px-6 py-3 rounded-full shadow-lg transition-all cursor-pointer"
+        >
+          <span>Jelajahi Wisata</span>
+          <ChevronDown className="w-4 h-4" />
+        </a>
 
-          <a
-            href={`https://wa.me/${waNumber}?text=Halo%20Admin%20Desa%20Wisata%20Karang%20Pakuan,%20saya%20ingin%20bertanya%20mengenai%20wisata.`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#16a34a] hover:bg-[#15803d] text-white font-semibold text-sm px-6 py-3 rounded-full shadow-lg transition-all"
+        <a
+          href={`https://wa.me/${waPrimary}?text=Halo%20Desa%20Wisata%20Karang%20Pakuan,%20saya%20ingin%20bertanya%20tentang%20wisata.`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-[#16a34a] hover:bg-[#15803d] text-white font-sans text-sm font-semibold px-6 py-3 rounded-full shadow-lg transition-all"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-4 h-4 shrink-0"
+            aria-hidden="true"
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="w-4 h-4 shrink-0"
-              aria-hidden="true"
-            >
-              <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
-              <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
-            </svg>
-            <span>Hubungi Kami</span>
-          </a>
-        </div>
+            <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+            <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
+          </svg>
+          <span>Hubungi Kami</span>
+        </a>
       </PageHero>
 
       {/* 2. PROFIL KARANG PAKUAN */}
